@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-const EventSourcing = () => {
+const WebSocket = () => {
     const [messages, setMessages] = useState([]);
     const [value, setValue] = useState('');
 
@@ -44,4 +44,4 @@ const EventSourcing = () => {
     );
 };
 
-export default EventSourcing;
+export default WebSocket;
