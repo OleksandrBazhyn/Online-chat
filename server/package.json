@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "longpolling.js",
+  "main": "src/longpolling.js",
   "scripts": {
     "start": "nodemon src/longpolling.js",
     "test": "echo \"Error: no test specified\" && exit 1"
