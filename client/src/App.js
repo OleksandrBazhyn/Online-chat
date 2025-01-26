@@ -1,13 +1,13 @@
 import React from 'react';
 import './app.css'
-import WebSocket from './websocket';
+import WebSock from './websocket';
 
 
 function App() {
 
     return (
         <div>
-            <WebSocket />
+            <WebSock />
         </div>
     )
 }

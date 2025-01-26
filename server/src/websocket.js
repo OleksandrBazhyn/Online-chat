@@ -1,31 +1,38 @@
-const express = require('express');
-const cors = require('cors');
-const events = require('events')
-const PORT = 5000;
+const ws = require('ws');
 
-const emitter = new events.EventEmitter();
+const ws_server = new ws.Server({
+    port: 5000,
+}, () => console.log(`Server started on 5000`))
 
-const app = express()
-
-app.use(cors())
-app.use(express.json())
-
-app.get('/connect', (req, res) => {
-    res.writeHead(200, {
-        'Connection': 'keep-alive',
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-    })
-    emitter.on('newMessage', (message) => {
-        res.write(`data: ${JSON.stringify(message)} \n\n`)
+ws_server.on('connection', function connection(ws) {
+    // ws.id = Date.now()
+    ws.on('message', function (message) {
+        message = JSON.parse(message);
+        switch(message.event) {
+            case 'message':
+                broadcastMessage(message)
+                break;
+            case 'connection':
+                broadcastMessage(message)
+                break;
+        }
     })
 })
 
-app.post('/new-messages', ((req, res) => {
-    const message = req.body;
-    emitter.emit('newMessage', message)
-    res.status(200)
-}))
+function broadcastMessage(message) {
+// function broadcastMessage(message, ws_id) {
+    ws_server.clients.forEach(client => {
+        // if(client.id === ws_id) {
+        //     client.send(JSON.stringify(message))
+        // }
+        client.send(JSON.stringify(message))
+    })
+}
 
-
-app.listen(PORT, () => console.log(`server started on port ${PORT}`))
+const message = {
+    event: 'message/connection',
+    id: 1,
+    date: '26.01.2021',
+    username: 'Oleksandr',
+    message: 'test message'
+}
