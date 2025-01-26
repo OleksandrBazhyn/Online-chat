@@ -1,9 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/eventsource.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon src/eventsource.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
