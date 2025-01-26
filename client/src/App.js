@@ -1,13 +1,13 @@
 import React from 'react';
 import './app.css'
-import EventSourcing from './eventsourcing';
+import WebSock from './websocket';
 
 
 function App() {
 
     return (
         <div>
-            <EventSourcing />
+            <WebSock />
         </div>
     )
 }
